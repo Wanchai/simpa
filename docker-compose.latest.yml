@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  simpa:
+    image: simpa
+    build:
+      context: https://github.com/Wanchai/simpa.git#main
+      args:
+        - SIMPA_ADDRESS=${SIMPA_ADDRESS}
+    restart: unless-stopped
+    container_name: simpa
+    volumes:
+      - simpa_data:/home/node/data
+    ports:
+      - '8080:3000'
+    environment:
+      - SESSION_SECRET=${SESSION_SECRET}
+      - PASSWORD=${PASSWORD}
+      - SIMPA_ADDRESS=${SIMPA_ADDRESS}
+      - FILTER_ORIGIN=${FILTER_ORIGIN}
+
+volumes:
+  simpa_data:
+  src:
