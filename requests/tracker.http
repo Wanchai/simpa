@@ -1,0 +1,17 @@
+###
+POST http://localhost:3000/tracker HTTP/1.1
+Content-Type: application/json
+
+{ "id": "", "ref": "twitter", "page":"/" }
+
+###
+POST http://localhost:3000/tracker HTTP/1.1
+Content-Type: application/json
+
+{ "id": "1y2k1sbuuu7", "ref": "twitter", "page":"/" }
+
+###
+GET http://localhost:3000/tracker/js HTTP/1.1
+###
+GET http://localhost:8080/tracker/js HTTP/1.1
+

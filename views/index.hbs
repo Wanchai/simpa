@@ -1,0 +1,73 @@
+{{#> layout }}
+
+<div class="tabs">
+  {{#if logged}}
+
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+  {{#each sites}}
+  <li class="nav-item" role="presentation">
+    <button class="nav-link{{#if @first}} active{{/if}}" id="{{this.site.id}}-tab" 
+      data-bs-toggle="tab" data-bs-target="#site-{{this.site.id}}" 
+      type="button" role="tab" aria-controls="{{this.site.id}}" aria-selected="true">{{this.site.name}}</button>
+  </li>
+
+  {{else}}
+    <h2>No sites yet!</h2>
+  {{/each}}
+  </ul>
+
+  <div class="tab-content" id="myTabContent">
+  {{#each sites}}
+    <div class="tab-pane fade{{#if @first}} active show{{/if}}" id="site-{{this.site.id}}" role="tabpanel" aria-labelledby="{{this.site.id}}-tablabel">
+      <canvas id="canvas-{{this.site.id}}"></canvas>
+
+      <script>
+        new Chart(document.getElementById('canvas-{{this.site.id}}').getContext('2d'), {
+        type: 'line',
+        data: JSON.parse('{{{this.data}}}'),
+        });
+      </script>
+
+      <hr class="mt-4">
+      <div class="row">
+
+      <table class="table table-striped col">
+        <thead>
+          <tr>
+            <th scope="col">Referer</th>
+            <th scope="col">Count</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each this.referers}}
+          <tr>
+            <td>{{this.url}}</td>
+            <td>{{this.count}}</td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+
+      <div class="col">
+        <canvas id="canvas-{{this.site.id}}-camembert"></canvas>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+
+  {{else}}
+
+  <div class="row justify-content-center">
+    <form class="col-2" method="post">
+      <label for="passfield" class="form-label"> Enter password</label>
+      <input id="passfield"  class="form-control" name="passfield" type="password" />
+      <button type="submit" class="btn btn-primary mt-2">Go</button>
+    </form>
+  </div>
+
+  {{/if}}
+
+</div>
+
+{{/layout}}

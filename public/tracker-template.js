@@ -1,0 +1,2 @@
+function call(a){const xhr=new XMLHttpRequest();xhr.open('POST','SIMPA_ADDRESS/tracker/');xhr.setRequestHeader('Content-Type','application/json');xhr.send(JSON.stringify({id:a,ref:document.referrer,page:window.location.pathname,}),)}
+function march(a){if(new Date(localStorage.getItem('simpa')).getTime()<new Date().getTime()){call(a);const d=new Date();d.setHours(d.getHours()+12);localStorage.setItem('simpa',d)}}
