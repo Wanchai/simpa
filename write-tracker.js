@@ -3,6 +3,9 @@ var fs = require('fs');
 
 const data = fs.readFileSync('public/tracker-template.js', 'utf8');
 
+console.log(process.env);
+console.log(process.env.SIMPA_ADDRESS);
+
 fs.writeFile(
   'public/tracker.js',
   data.replace(
