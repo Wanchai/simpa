@@ -31,6 +31,11 @@ export class AppController {
     if (body.passfield === this.configService.get<string>('password')) {
       session.logged = true;
     }
+    console.log(
+      "🚀 ~ AppController ~ this.configService.get<string>('password'):",
+      this.configService.get<string>('password'),
+    );
+    console.log('🚀 ~ AppController ~ body.passfield:', body.passfield);
     res.redirect('/');
   }
 
