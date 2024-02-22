@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    restart: unless-stopped
+    container_name: simpa
     volumes:
       - simpa_data:/home/node/data
     ports:

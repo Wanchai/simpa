@@ -3,13 +3,18 @@ version: '3.9'
 services:
   simpa:
     image: simpa
+    environment:
+      - NODE_ENV=development
+      - SESSION_SECRET=secret
+      - PASSWORD=plop
+      - SIMPA_ADDRESS=https://google.fr
+      - FILTER_ORIGIN=false
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - '8080:3000'
-    environment:
-      - NODE_ENV=development
+
     volumes:
       - data:/home/node/data
 

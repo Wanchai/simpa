@@ -37,6 +37,8 @@ export class AppController {
   @Get()
   @Render('index')
   root(@Session() session: Record<string, any>) {
+    console.log(process.env);
+
     if (!session.logged) {
       return {
         logged: false,
