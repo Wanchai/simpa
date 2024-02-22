@@ -4,8 +4,7 @@ services:
   simpa:
     image: simpa
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: https://github.com/Wanchai/simpa.git#main
       args:
         - SIMPA_ADDRESS=${SIMPA_ADDRESS}
     restart: unless-stopped

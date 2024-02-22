@@ -28,9 +28,13 @@ export class AppController {
     @Body() body: any,
     @Res() res: any,
   ) {
+    session.logged = false;
     if (body.passfield === this.configService.get<string>('password')) {
       session.logged = true;
     }
+
+    console.log('-- logged in --');
+
     res.redirect('/');
   }
 

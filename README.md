@@ -43,13 +43,17 @@ SIMPA_ADDRESS needs to be set **before** building the app.
 
 #### Docker Compose
 
+If you want to install it locally (after a git clone usually)
+
 ```
 docker compose up
 ```
 
+But if you want to install the latest version without cloning, use the content of `docker-compose.latest.yml`
+
 #### Admin
 
-Once it's installed you can log to the admin using the password set in the env variables.
+Once it's installed you can log to the admin (at the root of your host) using the password set in the env variables.
 
 Then, you can add new sites to track. If you set `FILTER_ORIGIN` to true, make **SURE** you enter the right URL for your site as it will use that string to filter incoming requests.
 
