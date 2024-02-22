@@ -33,7 +33,7 @@ export class AppController {
       session.logged = true;
     }
 
-    console.log('-- loggin --');
+    console.log('-- logged in --');
 
     res.redirect('/');
   }
@@ -41,8 +41,6 @@ export class AppController {
   @Get()
   @Render('index')
   root(@Session() session: Record<string, any>) {
-    console.log(session);
-
     if (!session.logged) {
       return {
         logged: false,
