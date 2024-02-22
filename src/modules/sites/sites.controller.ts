@@ -1,11 +1,11 @@
 import {
   Body,
   Controller,
-  Post,
   Get,
+  Post,
   Render,
-  Session,
   Res,
+  Session,
 } from '@nestjs/common';
 import { CreateSiteDto } from './dto/create-site.dto';
 import { SitesService } from './sites.service';
@@ -27,6 +27,7 @@ export class SitesController {
           createdAt: s.createdAt.toDateString(),
         })),
         logged: true,
+        host: process.env.SIMPA_ADDRESS,
       };
     });
   }

@@ -32,6 +32,16 @@
   {{/each}}
 </table>
 
+<br>
+<br>
+<br>
+
+<p>Add this inside <b>head</b> </p>
+<textarea cols="75"><script src="https://{{ host }}/tracker/js"></script></textarea>
+
+<p>Add this just before <b>/body</b> and replace --SITE_ID--</p>
+<textarea cols="75"><script>march("--SITE_ID--");</script></textarea>
+
 {{/if}}
 
 {{/layout}}
