@@ -12,6 +12,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - SIMPA_ADDRESS=https://google.fr
     ports:
       - '8080:3000'
 

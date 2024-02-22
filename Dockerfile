@@ -9,6 +9,10 @@ COPY package*.json ./
 RUN npm ci
 
 COPY --chown=node:node . .
+
+ARG SIMPA_ADDRESS
+ENV SIMPA_ADDRESS $SIMPA_ADDRESS
+
 RUN npm run build \
     && npm prune --production
 

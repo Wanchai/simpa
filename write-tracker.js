@@ -3,8 +3,6 @@ var fs = require('fs');
 
 const data = fs.readFileSync('public/tracker-template.js', 'utf8');
 
-console.log(process.env.SIMPA_ADDRESS);
-
 fs.writeFile(
   'public/tracker.js',
   data.replace(
@@ -15,6 +13,6 @@ fs.writeFile(
     if (err) {
       return console.log(err);
     }
-    console.log('The file was saved!');
+    console.log('Tracker was saved!');
   },
 );
