@@ -28,21 +28,20 @@ export class AppController {
     @Body() body: any,
     @Res() res: any,
   ) {
+    session.logged = false;
     if (body.passfield === this.configService.get<string>('password')) {
       session.logged = true;
     }
-    console.log(
-      "🚀 ~ AppController ~ this.configService.get<string>('password'):",
-      this.configService.get<string>('password'),
-    );
-    console.log('🚀 ~ AppController ~ body.passfield:', body.passfield);
+
+    console.log('-- loggin --');
+
     res.redirect('/');
   }
 
   @Get()
   @Render('index')
   root(@Session() session: Record<string, any>) {
-    console.log(process.env);
+    console.log(session);
 
     if (!session.logged) {
       return {

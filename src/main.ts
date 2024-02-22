@@ -16,9 +16,6 @@ async function bootstrap() {
       secret: configService.get<string>('sessionSecret'),
       resave: false,
       saveUninitialized: true,
-      cookie: {
-        secure: configService.get<boolean>('isProduction'),
-      },
     }),
   );
   app.useStaticAssets(join(__dirname, '..', 'public'));
