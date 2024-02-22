@@ -6,14 +6,14 @@ services:
     environment:
       - NODE_ENV=development
       - SESSION_SECRET=secret
-      - PASSWORD=plop
-      - SIMPA_ADDRESS=https://google.fr
+      - PASSWORD=demo
+      - SIMPA_ADDRESS=https://localhost:8080
       - FILTER_ORIGIN=false
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        - SIMPA_ADDRESS=https://google.fr
+        - SIMPA_ADDRESS=https://localhost:8080
     ports:
       - '8080:3000'
 

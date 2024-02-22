@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - SIMPA_ADDRESS=${SIMPA_ADDRESS}
     restart: unless-stopped
     container_name: simpa
     volumes:
