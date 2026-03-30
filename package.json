@@ -9,6 +9,7 @@
     "ng": "ng",
     "dev": "vite",
     "start": "pnpm run dev",
+    "prebuild": "rimraf dist && node write-tracker.cjs",
     "build": "vite build",
     "watch": "vite build --watch",
     "test": "vitest",
