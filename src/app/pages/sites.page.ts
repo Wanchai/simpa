@@ -56,6 +56,7 @@ interface Site {
               <th>Name</th>
               <th>URL</th>
               <th>Created</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -65,6 +66,12 @@ interface Site {
                 <td>{{ site.name }}</td>
                 <td>{{ site.url }}</td>
                 <td>{{ site.createdAt }}</td>
+                <td>
+                  <button
+                    class="btn btn-sm btn-danger"
+                    (click)="deleteSite(site.id, site.name)"
+                  >Delete</button>
+                </td>
               </tr>
             }
           </tbody>
@@ -112,6 +119,14 @@ export default class Sites {
       error: (err) => {
         if (err.status === 401) this.loggedIn.set(false);
       },
+    });
+  }
+
+  deleteSite(id: string, name: string): void {
+    if (!confirm(`Delete "${name}" and all its data? This cannot be undone.`)) return;
+    this.http.delete(`/api/sites/${id}`).subscribe({
+      next: () => this.loadSites(),
+      error: (err) => alert(`Failed to delete site: ${err.message}`),
     });
   }
 }

@@ -34,7 +34,7 @@ RUN mkdir data && touch simpa.db && cp -n ./simpa.db ./data/simpa.db
 COPY --from=builder --chown=node:node /home/node/views/ ./views/
 COPY --from=builder --chown=node:node /home/node/public/ ./public/
 
-RUN npm run migration:run:prod
+RUN npm run db:migrate
 
 EXPOSE 3000
 
