@@ -12,14 +12,6 @@ The 2 main features are:
 
 **If you are tired of google analytics complexity, want your data back, want to get rid of third party providers (and get rid of the cookie warning at the same time), this is for you!**
 
-#### Tech Stack
-
-- Handlebars
-- Bootstrap
-- NestJs
-- TypeORM
-- SQLite
-
 #### Screen capture
 
 ![alt text](public/screenshot.png 'screenshot')
@@ -81,7 +73,8 @@ A key is placed on the localStorage to count visits only once a day per device.
 
 ```
 git clone
-npm run start:debug
+pnpm install
+pnpm start
 ```
 
 ### How it works
