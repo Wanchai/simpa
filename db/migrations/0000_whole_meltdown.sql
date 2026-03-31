@@ -1,4 +1,4 @@
-CREATE TABLE `count` (
+CREATE TABLE IF NOT EXISTS `count` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`siteId` text NOT NULL,
 	`date` text DEFAULT (datetime('now')) NOT NULL,
@@ -9,14 +9,14 @@ CREATE TABLE `count` (
 	`client` text DEFAULT '' NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE `day_count` (
+CREATE TABLE IF NOT EXISTS `day_count` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`siteId` text NOT NULL,
 	`date` text NOT NULL,
 	`test` text NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE `site` (
+CREATE TABLE IF NOT EXISTS `site` (
 	`id` text PRIMARY KEY NOT NULL,
 	`name` text NOT NULL,
 	`url` text NOT NULL,
