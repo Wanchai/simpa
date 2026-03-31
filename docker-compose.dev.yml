@@ -2,7 +2,6 @@ services:
   simpa:
     image: simpa
     environment:
-      - NODE_ENV=development
       - SESSION_SECRET=secret
       - PASSWORD=demo
       - SIMPA_ADDRESS=https://localhost:8080

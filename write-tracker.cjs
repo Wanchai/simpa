@@ -7,7 +7,7 @@ fs.writeFile(
   'public/tracker.js',
   data.replace(
     'SIMPA_ADDRESS',
-    process.env.SIMPA_ADDRESS || 'http://localhost:5173',
+    process.env.SIMPA_ADDRESS || 'http://localhost:8080',
   ),
   (err) => {
     if (err) {

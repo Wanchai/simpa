@@ -1,41 +1,43 @@
-FROM node:20-alpine as builder
+# ── Stage 1: Build ────────────────────────────────────────────────────────────
+FROM node:22-alpine AS builder
 
-ENV NODE_ENV build
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
-USER node
-WORKDIR /home/node
+WORKDIR /app
 
-COPY package*.json ./
-RUN npm ci
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm install --frozen-lockfile
 
-COPY --chown=node:node . .
+COPY . .
 
-ARG SIMPA_ADDRESS
-ENV SIMPA_ADDRESS $SIMPA_ADDRESS
+RUN pnpm build
 
-RUN npm run build \
-    && npm prune --production
+# ── Stage 2: Runtime ──────────────────────────────────────────────────────────
+FROM node:22-alpine
 
-# ---
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOST=0.0.0.0
 
-FROM node:20-alpine
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
-ENV NODE_ENV development
+WORKDIR /app
 
-USER node
-WORKDIR /home/node
+# Copy build output
+COPY --from=builder /app/dist ./dist
 
-COPY --from=builder --chown=node:node /home/node/package*.json ./
-COPY --from=builder --chown=node:node /home/node/node_modules/ ./node_modules/
-COPY --from=builder --chown=node:node /home/node/dist/ ./dist/
+# Copy node_modules (needed for native externals: better-sqlite3, geoip-lite)
+COPY --from=builder /app/node_modules ./node_modules
 
-RUN mkdir data && touch simpa.db && cp -n ./simpa.db ./data/simpa.db
+# Copy package files (needed for pnpm scripts) and migration assets
+COPY --from=builder /app/package.json /app/pnpm-lock.yaml /app/pnpm-workspace.yaml ./
+COPY --from=builder /app/drizzle.config.ts ./drizzle.config.ts
+COPY --from=builder /app/db ./db
 
-COPY --from=builder --chown=node:node /home/node/views/ ./views/
-COPY --from=builder --chown=node:node /home/node/public/ ./public/
-
-RUN npm run db:migrate
+# Persistent data directory for SQLite
+RUN mkdir -p data
 
 EXPOSE 3000
 
-CMD ["node", "dist/main.js"]
+# Run DB migrations then start the Nitro SSR server
+CMD ["sh", "-c", "pnpm db:migrate && node dist/analog/server/index.mjs"]

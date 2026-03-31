@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     analog({
       nitro: {
+        preset: 'node-server',
         externals: {
           external: ['better-sqlite3', 'geoip-lite'],
         },
