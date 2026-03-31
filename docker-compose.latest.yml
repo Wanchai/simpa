@@ -8,7 +8,7 @@ services:
     restart: unless-stopped
     container_name: simpa
     volumes:
-      - simpa_data:/home/node/data
+      - simpa_data:/app/data
     ports:
       - '8080:3000'
     environment:

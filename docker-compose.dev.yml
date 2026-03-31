@@ -15,7 +15,7 @@ services:
       - '8080:3000'
 
     volumes:
-      - data:/home/node/data
+      - data:/app/data
 
 volumes:
   data:
